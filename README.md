@@ -34,3 +34,10 @@ Operaciones a implementar. Todas las operaciones deben implementarse únicamente
 6. Generar recomendaciones de compra
    * a. A partir de un producto, recomendar otros de la misma categoría (recorriendo la lista recursivamente).
 
+## Restricciones tecnicas
+
+• No se puede utilizar iteracciones for/while.
+• Debe dar solución al menos 2 puntos utilizando tail recursión ó recursión de cola
+• Todos los puntos se deben solucionar utilizando recursividad, sin funciones existentes que
+realicen toda la operación.
+
