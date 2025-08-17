@@ -18,19 +18,19 @@ Operaciones a implementar. Todas las operaciones deben implementarse únicamente
    * a. Usar búsqueda binaria recursiva (aprovechando el orden alfabético).
    * b. Retornar todos los datos del producto si existe.
 
-3. Cálculo del precio total de todos los productos
+2. Cálculo del precio total de todos los productos
    * a. Recorrer recursivamente y acumular el precio total.
 
-5. Cálculo del precio promedio por categoría
+3. Cálculo del precio promedio por categoría
    * a. Recorrer recursivamente, contar productos por categoría y sumar precios para luego calcular el promedio.
 
-7. Ordenamiento recursivo por precio
+4. Ordenamiento recursivo por precio
    * a. Implementar QuickSort o MergeSort recursivo.
    * b. Poder ordenar de menor a mayor o viceversa.
 
-9. Búsqueda de productos dentro de un rango de precios
- a. Retornar una nueva lista recursiva con los productos que cumplen el rango.
+5. Búsqueda de productos dentro de un rango de precios
+   * a. Retornar una nueva lista recursiva con los productos que cumplen el rango.
 
-10. Generar recomendaciones de compra
- a. A partir de un producto, recomendar otros de la misma categoría (recorriendo la lista recursivamente).
+6. Generar recomendaciones de compra
+   * a. A partir de un producto, recomendar otros de la misma categoría (recorriendo la lista recursivamente).
 
