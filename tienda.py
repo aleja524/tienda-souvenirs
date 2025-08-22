@@ -6,10 +6,26 @@ class Producto:
         self.precio = precio
     
 def __str__(self):
-    return f"[{self.codigo}] {self.nombre} - {self.categoria} - {self.precio}"
+    return f"[{self.codigo}] {self.nombre} - {self.categoria} - ${self.precio}"
     
 def busqueda_binaria(productos, nombre, inicio= 0, fin= None):
-    pass
+    
+    if fin is None:
+        fin = len(productos) - 1
+    
+    if inicio > fin:
+        return None
+    
+    mid = (inicio + fin) // 2
+    actual = productos[mid]
+
+    if actual.nombre == nombre:
+        return actual
+    
+    if nombre < actual.nombre:
+        return busqueda_binaria(productos, nombre, inicio, mid - 1)
+    else:
+        return busqueda_binaria(productos, nombre, inicio, mid + 1, fin)
 
 def precio_total(productos, i=0, acumulado=0):
     pass
@@ -41,4 +57,8 @@ productos = [
     Producto("004", "bufanda andina", "ropa", 25000)
 ]
 
+if __name__ == "__main__":
+    print("lista de productos: ")
+    imprimir_productos(productos)
 
+    print("\n>> Precio total:", precio_total(productos))
