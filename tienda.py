@@ -5,8 +5,8 @@ class Producto:
         self.categoria = categoria
         self.precio = precio
     
-def __str__(self):
-    return f"[{self.codigo}] {self.nombre} - {self.categoria} - ${self.precio}"
+    def __str__(self):
+        return f"[{self.codigo}] {self.nombre} - {self.categoria} - ${self.precio}"
     
 def busqueda_binaria(productos, nombre, inicio= 0, fin= None):
     
@@ -27,8 +27,13 @@ def busqueda_binaria(productos, nombre, inicio= 0, fin= None):
     else:
         return busqueda_binaria(productos, nombre, inicio, mid + 1, fin)
 
+
 def precio_total(productos, i=0, acumulado=0):
-    pass
+    if i == len(productos):
+        return acumulado
+    
+    nuevo_acumulado = acumulado + productos[i].precio
+    return precio_total(productos, i + 1, nuevo_acumulado)
 
 def promedio_categoria(productos, categoria, i=0, suma=0, cantidad=0):
     pass
@@ -51,14 +56,17 @@ def imprimir_productos(productos, i=0):
 
 
 productos = [
-    Producto("001", "Artesania maya", "artesanias", "artesanias", 15000),
+    Producto("001", "Artesania maya", "artesanias", 15000),
     Producto("002", "Camisa bordada", "ropa", 40000),
     Producto("003", "iman medellin", "imanes", 8000),
     Producto("004", "bufanda andina", "ropa", 25000)
 ]
 
+
 if __name__ == "__main__":
-    print("lista de productos: ")
+    print("Lista de productos (ordenados):")
     imprimir_productos(productos)
 
-    print("\n>> Precio total:", precio_total(productos))
+    # --- Prueba precio total ---
+    total = precio_total(productos)
+    print("\nPrecio total de todos los productos:", total)
