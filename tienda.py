@@ -52,8 +52,15 @@ def promedio_categoria(productos, categoria, i=0, suma=0, cantidad=0):
 def ordenamiento_precio(productos, ascendente=True):
     pass
 
-def productos_en_rango(productos, minimo, maximo, i=0, resultado=None):
-    pass
+def productos_en_rango(productos, minimo, maximo, i=0):
+    if i == len(productos):
+        return []
+    actual = productos[i]
+
+    if actual.precio >= minimo and actual.precio <= maximo:
+        return [actual] + productos_en_rango(productos, minimo, maximo, i + 1)
+    else:
+        return productos_en_rango(productos, minimo, maximo, i + 1) 
 
 def recomendaciones(productos, producto_base, i=0, resultado=None):
     pass
@@ -86,3 +93,10 @@ if __name__ == "__main__":
     categoria = "ropa"
     promedio = promedio_categoria(productos, categoria)
     print(f"\nPrecio promedio de la categoría '{categoria}': {promedio}")
+
+    # --- Prueba búsqueda en rango ---
+    minimo, maximo = 10000, 30000
+    print(f"\nProductos con precio entre {minimo} y {maximo}:")
+    en_rango = productos_en_rango(productos, minimo, maximo)
+
+    imprimir_productos(en_rango)
