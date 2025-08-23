@@ -35,8 +35,19 @@ def precio_total(productos, i=0, acumulado=0):
     nuevo_acumulado = acumulado + productos[i].precio
     return precio_total(productos, i + 1, nuevo_acumulado)
 
+
 def promedio_categoria(productos, categoria, i=0, suma=0, cantidad=0):
-    pass
+    if i == len(productos):
+        if cantidad == 0:
+            return 0
+        return suma / cantidad
+    
+    if productos[i].categoria == categoria:
+        nuevo_suma = suma + productos[i].precio 
+        nueva_cantidad = cantidad + 1
+        return promedio_categoria(productos, categoria, i + 1, nuevo_suma, nueva_cantidad)
+    else:
+        return promedio_categoria(productos, categoria, i + 1, suma, cantidad)
 
 def ordenamiento_precio(productos, ascendente=True):
     pass
@@ -70,3 +81,8 @@ if __name__ == "__main__":
     # --- Prueba precio total ---
     total = precio_total(productos)
     print("\nPrecio total de todos los productos:", total)
+
+    # --- Prueba promedio por categoría ---
+    categoria = "ropa"
+    promedio = promedio_categoria(productos, categoria)
+    print(f"\nPrecio promedio de la categoría '{categoria}': {promedio}")
