@@ -122,6 +122,13 @@ if __name__ == "__main__":
     print("Lista de productos (ordenados):")
     imprimir_productos(productos)
 
+    buscado = "Camisa bordada"
+    encontrado = busqueda_binaria(productos, buscado)
+    if encontrado:
+        print(f"Producto encontrado: {encontrado}")
+    else:
+        print(f"'{buscado}' no está en la lista")
+
     # --- Prueba precio total ---
     total = precio_total(productos)
     print("\nPrecio total de todos los productos:", total)
