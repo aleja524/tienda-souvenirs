@@ -49,8 +49,10 @@ def promedio_categoria(productos, categoria, i=0, suma=0, cantidad=0):
     else:
         return promedio_categoria(productos, categoria, i + 1, suma, cantidad)
 
+
 def ordenamiento_precio(productos, ascendente=True):
     pass
+
 
 def productos_en_rango(productos, minimo, maximo, i=0):
     if i == len(productos):
@@ -62,8 +64,16 @@ def productos_en_rango(productos, minimo, maximo, i=0):
     else:
         return productos_en_rango(productos, minimo, maximo, i + 1) 
 
+
 def recomendaciones(productos, producto_base, i=0, resultado=None):
-    pass
+    if i == len(productos):
+        return []
+    actual = productos[i]
+
+    if actual.categoria == producto_base.categoria and actual != producto_base:
+        return [actual] + recomendaciones(productos, producto_base, i + 1)
+    else:
+        return recomendaciones(productos, producto_base, i + 1)
 
 def imprimir_productos(productos, i=0):
     if i == len(productos):
@@ -98,5 +108,10 @@ if __name__ == "__main__":
     minimo, maximo = 10000, 30000
     print(f"\nProductos con precio entre {minimo} y {maximo}:")
     en_rango = productos_en_rango(productos, minimo, maximo)
-
     imprimir_productos(en_rango)
+
+    # --- Prueba recomendaciones ---
+    producto_base = productos[1]  # Camisa bordada
+    print(f"\nRecomendaciones para '{producto_base.nombre}':")
+    recomendados = recomendaciones(productos, producto_base)
+    imprimir_productos(recomendados)
