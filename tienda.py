@@ -51,7 +51,34 @@ def promedio_categoria(productos, categoria, i=0, suma=0, cantidad=0):
 
 
 def ordenamiento_precio(productos, ascendente=True):
-    pass
+    if len(productos) <= 1:
+        return productos
+    
+    pivote = productos[0]
+    resto = productos[1:]
+
+    def partir(productos, i = 0, menores = None, mayores = None):
+        if menores is None: menores = []
+        if mayores is None: mayores = []
+
+        if i == len(productos):
+            return menores, mayores
+        
+        actual = productos[i]
+        if actual.precio < pivote.precio:
+            return partir(productos, i + 1, menores + [actual], mayores)
+        else:
+            return partir(productos, i + 1, menores, mayores + [actual])
+    
+    menores, mayores = partir(resto)
+
+    izquierda = ordenamiento_precio(menores, ascendente)
+    derecha = ordenamiento_precio(mayores, ascendente)
+
+    if ascendente:
+        return izquierda + [pivote] + derecha
+    else:
+        return derecha + [pivote] + izquierda
 
 
 def productos_en_rango(productos, minimo, maximo, i=0):
@@ -115,3 +142,11 @@ if __name__ == "__main__":
     print(f"\nRecomendaciones para '{producto_base.nombre}':")
     recomendados = recomendaciones(productos, producto_base)
     imprimir_productos(recomendados)
+
+    print("\nProductos ordenados de menor a mayor precio:")
+    ordenados_asc = ordenamiento_precio(productos, ascendente=True)
+    imprimir_productos(ordenados_asc)
+
+    print("\nProductos ordenados de mayor a menor precio:")
+    ordenados_desc = ordenamiento_precio(productos, ascendente=False)
+    imprimir_productos(ordenados_desc)
