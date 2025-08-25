@@ -129,31 +129,33 @@ if __name__ == "__main__":
     else:
         print(f"'{buscado}' no está en la lista")
 
-    # --- Prueba precio total ---
+    # Prueba precio total
     total = precio_total(productos)
     print("\nPrecio total de todos los productos:", total)
 
-    # --- Prueba promedio por categoría ---
+    # Prueba promedio por categoría
     categoria = "ropa"
     promedio = promedio_categoria(productos, categoria)
     print(f"\nPrecio promedio de la categoría '{categoria}': {promedio}")
 
-    # --- Prueba búsqueda en rango ---
+    # Prueba búsqueda en rango
     minimo, maximo = 10000, 30000
     print(f"\nProductos con precio entre {minimo} y {maximo}:")
     en_rango = productos_en_rango(productos, minimo, maximo)
     imprimir_productos(en_rango)
 
-    # --- Prueba recomendaciones ---
+    # Prueba recomendaciones
     producto_base = productos[1]  # Camisa bordada
     print(f"\nRecomendaciones para '{producto_base.nombre}':")
     recomendados = recomendaciones(productos, producto_base)
     imprimir_productos(recomendados)
 
+    # Prueba ordenamiento asc
     print("\nProductos ordenados de menor a mayor precio:")
     ordenados_asc = ordenamiento_precio(productos, ascendente=True)
     imprimir_productos(ordenados_asc)
 
+    # Prueba ordenamiento desc
     print("\nProductos ordenados de mayor a menor precio:")
     ordenados_desc = ordenamiento_precio(productos, ascendente=False)
     imprimir_productos(ordenados_desc)
