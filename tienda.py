@@ -25,7 +25,7 @@ def busqueda_binaria(productos, nombre, inicio= 0, fin= None):
     if nombre < actual.nombre:
         return busqueda_binaria(productos, nombre, inicio, mid - 1)
     else:
-        return busqueda_binaria(productos, nombre, inicio, mid + 1, fin)
+        return busqueda_binaria(productos, nombre, mid + 1, fin)
 
 
 def precio_total(productos, i=0, acumulado=0):
@@ -112,9 +112,15 @@ def imprimir_productos(productos, i=0):
 
 productos = [
     Producto("001", "Artesania maya", "artesanias", 15000),
+    Producto("004", "bufanda andina", "ropa", 25000),
     Producto("002", "Camisa bordada", "ropa", 40000),
     Producto("003", "iman medellin", "imanes", 8000),
-    Producto("004", "bufanda andina", "ropa", 25000)
+    Producto("005", "mug", "Hogar", 20000),
+    Producto("006", "póster", "Decoración", 12000),
+    Producto("007", "pulsera", "Accesorios", 10000),
+    Producto("008", "ruana", "ropa", 60000),
+    Producto("009", "sombrero", "ropa", 15000),
+    Producto("010", "vaso térmico", "Hogar", 25000),
 ]
 
 
