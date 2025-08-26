@@ -115,12 +115,6 @@ productos = [
     Producto("004", "bufanda andina", "ropa", 25000),
     Producto("002", "Camisa bordada", "ropa", 40000),
     Producto("003", "iman medellin", "imanes", 8000),
-    Producto("005", "mug", "Hogar", 20000),
-    Producto("006", "póster", "Decoración", 12000),
-    Producto("007", "pulsera", "Accesorios", 10000),
-    Producto("008", "ruana", "ropa", 60000),
-    Producto("009", "sombrero", "ropa", 15000),
-    Producto("010", "vaso térmico", "Hogar", 25000),
 ]
 
 
@@ -128,7 +122,7 @@ if __name__ == "__main__":
     print("Lista de productos (ordenados):")
     imprimir_productos(productos)
 
-    buscado = "Camisa bordada"
+    buscado = "bufanda andina"
     encontrado = busqueda_binaria(productos, buscado)
     if encontrado:
         print(f"Producto encontrado: {encontrado}")
