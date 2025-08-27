@@ -19,10 +19,10 @@ def busqueda_binaria(productos, nombre, inicio= 0, fin= None):
     mid = (inicio + fin) // 2
     actual = productos[mid]
 
-    if actual.nombre == nombre:
+    if actual.nombre.lower() == nombre.lower():
         return actual
     
-    if nombre < actual.nombre:
+    if nombre.lower() < actual.nombre.lower():
         return busqueda_binaria(productos, nombre, inicio, mid - 1)
     else:
         return busqueda_binaria(productos, nombre, mid + 1, fin)
@@ -50,49 +50,19 @@ def promedio_categoria(productos, categoria, i=0, suma=0, cantidad=0):
         return promedio_categoria(productos, categoria, i + 1, suma, cantidad)
 
 
-def ordenamiento_precio(productos, ascendente=True):
-    if len(productos) <= 1:
-        return productos
-    
-    pivote = productos[0]
-    resto = productos[1:]
-
-    def partir(productos, i = 0, menores = None, mayores = None):
-        if menores is None: menores = []
-        if mayores is None: mayores = []
-
-        if i == len(productos):
-            return menores, mayores
-        
-        actual = productos[i]
-        if actual.precio < pivote.precio:
-            return partir(productos, i + 1, menores + [actual], mayores)
-        else:
-            return partir(productos, i + 1, menores, mayores + [actual])
-    
-    menores, mayores = partir(resto)
-
-    izquierda = ordenamiento_precio(menores, ascendente)
-    derecha = ordenamiento_precio(mayores, ascendente)
-
-    if ascendente:
-        return izquierda + [pivote] + derecha
-    else:
-        return derecha + [pivote] + izquierda
-
-
-def productos_en_rango(productos, minimo, maximo, i=0):
+def productos_en_rango(productos, minimo, maximo, i=0, fuera = 0):
     if i == len(productos):
-        return []
+        return [], fuera
     actual = productos[i]
 
     if actual.precio >= minimo and actual.precio <= maximo:
-        return [actual] + productos_en_rango(productos, minimo, maximo, i + 1)
+        en_rango, fuera = productos_en_rango(productos, minimo, maximo, i + 1, fuera)
+        return [actual] + en_rango, fuera
     else:
-        return productos_en_rango(productos, minimo, maximo, i + 1) 
+        return productos_en_rango(productos, minimo, maximo, i + 1, fuera + 1) 
 
 
-def recomendaciones(productos, producto_base, i=0, resultado=None):
+def recomendaciones(productos, producto_base, i=0):
     if i == len(productos):
         return []
     actual = productos[i]
@@ -122,7 +92,7 @@ if __name__ == "__main__":
     print("Lista de productos (ordenados):")
     imprimir_productos(productos)
 
-    buscado = "bufanda andina"
+    buscado = "Camisa bordada"
     encontrado = busqueda_binaria(productos, buscado)
     if encontrado:
         print(f"Producto encontrado: {encontrado}")
@@ -141,21 +111,12 @@ if __name__ == "__main__":
     # Prueba búsqueda en rango
     minimo, maximo = 10000, 30000
     print(f"\nProductos con precio entre {minimo} y {maximo}:")
-    en_rango = productos_en_rango(productos, minimo, maximo)
+    en_rango, fuera = productos_en_rango(productos, minimo, maximo)
     imprimir_productos(en_rango)
+    print(f"\nCantidad de productos fuera del rango: {fuera}")
 
     # Prueba recomendaciones
     producto_base = productos[1]  # Camisa bordada
     print(f"\nRecomendaciones para '{producto_base.nombre}':")
     recomendados = recomendaciones(productos, producto_base)
     imprimir_productos(recomendados)
-
-    # Prueba ordenamiento asc
-    print("\nProductos ordenados de menor a mayor precio:")
-    ordenados_asc = ordenamiento_precio(productos, ascendente=True)
-    imprimir_productos(ordenados_asc)
-
-    # Prueba ordenamiento desc
-    print("\nProductos ordenados de mayor a menor precio:")
-    ordenados_desc = ordenamiento_precio(productos, ascendente=False)
-    imprimir_productos(ordenados_desc)
